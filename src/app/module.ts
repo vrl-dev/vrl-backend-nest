@@ -7,6 +7,7 @@ import { join } from 'path';
 import { databaseHost, databaseName, databasePassword, databasePort, databaseUsername } from 'src/config/constants';
 
 import { AppController } from './controller';
+import { AppResolver } from './resolver';
 import { AppService } from './service';
 
 @Module({
@@ -32,6 +33,6 @@ import { AppService } from './service';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppResolver],
 })
 export class AppModule {}
