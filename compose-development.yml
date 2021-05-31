@@ -8,7 +8,7 @@ services:
       dockerfile: ./docker/Dockerfile
       target: development
     volumes:
-      - ../..:/usr/src/app
+      - ./:/usr/src/app
       - /usr/src/app/node_modules
     env_file: .env.development
     environment:
@@ -17,12 +17,15 @@ services:
       - ${SERVER_PORT}:${SERVER_PORT}
       - 9229:9229
     command: yarn start:dev
+    links:
+      - database
     depends_on:
       database:
         condition: service_healthy
     networks:
       - webnet
   database:
+    hostname: vrl-postgres
     container_name: database
     image: postgres:12
     networks:
